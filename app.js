@@ -5,8 +5,6 @@ const port = 3000;
 const mongoose = require("mongoose");
 const linkRoute = require('./routes/linkRoute')
 
-const path = require('path');
-
 mongoose.set('strictQuery', true)
 mongoose.connect("mongodb://localhost/newlinks", {
     useNewUrlParser: true,
@@ -19,7 +17,8 @@ let db = mongoose.connection;
 db.on("error", () => { console.log("Houver um erro") })
 db.once("open", () => { console.log("Banco carregado") })
 
-
+app.set('view engine', 'ejs');
+app.set('views')
 
 app.use('/', linkRoute);
 
