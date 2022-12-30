@@ -12,13 +12,19 @@
 
 
     <form action="/" method="post">
-        <input type="text" name="title" required placeholder="Título">
-        <input type="text" name="description" placeholder="Descrição">
-        <input type="url" name="url" required placeholder="https://exemplo.com">
+        <input type="text" name="title" required placeholder="Título" value="<%=body.title%>">
+        <input type="text" name="description" placeholder="Descrição" value="<%=body.description%>">
+        <input type="url" name="url" required placeholder="https://exemplo.com" value="<%=body.message%>">
 
         <button type="submit">Salvar</button>
 
     </form>
+
+    <%if(error){%>
+        <h3>
+            <%=error.message%>
+        </h3>
+        <%}%>
 
 </body>
 
