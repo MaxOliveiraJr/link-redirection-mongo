@@ -2,28 +2,46 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Links</title>
 </head>
 
 <body>
-
     <% for(let i=0;i < links.length ; i++){ %>
-        <div data-key="<%=i%>" id="<%=links[i].id%>">
+        <form action="/?_method=DELETE" method="post">
+            <div data-key="<%=i%>" id="<%=links[i].id%>">
+                <h2>
+                    <%=links[i].title%>
+                </h2>
+                <div>
+                    <%=links[i].description%>
+                </div>
+                <div>
+                    <%=links[i].url%>
+                </div>
+                <input name="id" value="<%=links[i].id%>" hidden>
+                <button type="submit">Deletar</button>
+            </div>
 
-            <h2>
-                <%=links[i].title%>
-            </h2>
-            <div>
-                <%=links[i].description%>
-            </div>
-            <div>
-                <%=links[i].url%>
-            </div>
-        </div>
+        </form>
         <%}%>
+            <script>
+                function deleteLink(id) {
+                    fetch(`/${id}`, { method: "DELETE" }).then((res) => {
+                        if (res.status == 200) {
+                            res.text().then((linkId) => {
+                                document.getElementById(linkId).remove();
+                            });
+                        } else {
+                            res.json().then((error) => {
+                                console.log(error.message);
+                            });
+                        }
+                    });
+                }
+            </script>
 </body>
 
 </html>

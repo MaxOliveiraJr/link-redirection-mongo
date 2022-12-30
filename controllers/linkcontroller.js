@@ -3,7 +3,7 @@ const redirect = async (req, res) => {
     let title = req.params.title
     try {
         let doc = await Link.findOne({ title });
-        console.log(doc)
+    
         res.redirect(doc.url)
     } catch (error) {
         res.send(error)
@@ -32,5 +32,23 @@ const allLinks = async (req, res) => {
     }
 }
 
+const deleteLink = async (req, res) => {
 
-module.exports = { redirect, addLink, allLinks }
+    let id = req.params.id
+
+    if (!id) {
+        id = req.body.id;
+    }
+    try {
+
+        await Link.findByIdAndDelete(id)
+        // res.send(id)
+
+        res.redirect('/all')
+    } catch (error) {
+        res.status(404).send(error)
+    }
+}
+
+
+module.exports = { redirect, addLink, allLinks, deleteLink }
