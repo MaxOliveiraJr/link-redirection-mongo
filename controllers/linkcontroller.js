@@ -3,7 +3,7 @@ const redirect = async (req, res) => {
     let title = req.params.title
     try {
         let doc = await Link.findOne({ title });
-    
+
         res.redirect(doc.url)
     } catch (error) {
         res.send(error)
@@ -15,7 +15,7 @@ const addLink = async (req, res) => {
     let link = new Link(req.body)
     try {
         let doc = await link.save();
-        res.send("Link Adicionado com sucesso");
+        res.redirect("/");
     } catch (error) {
         res.render('index', { error, body: req.body })
     }
@@ -44,7 +44,7 @@ const deleteLink = async (req, res) => {
         await Link.findByIdAndDelete(id)
         // res.send(id)
 
-        res.redirect('/all')
+        res.redirect('/')
     } catch (error) {
         res.status(404).send(error)
     }
