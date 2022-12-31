@@ -10,7 +10,7 @@ router.use(methodOverride('_method'))
 
 router.get('/', linkController.allLinks);
 router.get('/edit/:id', linkController.loadLink);
-router.get('/add', (req, res) => res.render('index', { error: false, body: {} }));
+router.get('/add', (req, res) => res.render('add', { error: false, body: {} }));
 router.get('/:title', linkController.redirect);
 
 router.post('/', express.urlencoded({ extended: true }), linkController.addLink);
