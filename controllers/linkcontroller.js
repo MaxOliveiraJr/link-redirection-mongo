@@ -2,7 +2,7 @@ const Link = require("../models/Link");
 const redirect = async (req, res) => {
     let title = req.params.title
     try {
-        let doc = await Link.findOne({ title });
+        let doc = await Link.findOneAndUpdate({ title }, { $inc: { click: 1 } });
 
         res.redirect(doc.url)
     } catch (error) {
