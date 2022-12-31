@@ -10,8 +10,8 @@
 
 <body>
 
-    <h1>Add Link</h1>
-    <form action="/" method="post">
+    <h1>Editar Link</h1>
+    <form action="/edit/<%=body.id%>" method="post">
         <input type="text" name="title" required placeholder="Título" value="<%=body.title%>">
         <input type="text" name="description" placeholder="Descrição" value="<%=body.description%>">
         <input type="url" name="url" required placeholder="https://exemplo.com" value="<%=body.url%>">
